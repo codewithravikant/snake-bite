@@ -74,9 +74,23 @@ function setupInputHandlers() {
     handleKeyUp(e);
   });
 
-  // Prevent default behavior for game keys
+  // Prevent default behavior for game keys (but not when typing in input fields)
   document.addEventListener('keydown', (e) => {
     const key = e.code;
+    
+    // Don't prevent default if user is typing in an input field
+    const activeElement = document.activeElement;
+    const isTyping = activeElement && (
+      activeElement.tagName === 'INPUT' ||
+      activeElement.tagName === 'TEXTAREA' ||
+      activeElement.isContentEditable ||
+      activeElement.contentEditable === 'true'
+    );
+    
+    if (isTyping) {
+      return; // Allow normal typing behavior
+    }
+    
     // Check if key matches player's control scheme
     if (playerControlScheme === 'wasd' && (key === 'KeyW' || key === 'KeyS' || key === 'KeyA' || key === 'KeyD')) {
       e.preventDefault();
@@ -256,6 +270,19 @@ function setupLandscapeFullscreenDetection() {
 function handleKeyDown(e) {
   const key = e.code;
   
+  // Don't process game input if user is typing in an input field
+  const activeElement = document.activeElement;
+  const isTyping = activeElement && (
+    activeElement.tagName === 'INPUT' ||
+    activeElement.tagName === 'TEXTAREA' ||
+    activeElement.isContentEditable ||
+    activeElement.contentEditable === 'true'
+  );
+  
+  if (isTyping) {
+    return; // User is typing, don't process as game input
+  }
+  
   // Check if key matches player's control scheme FIRST
   let direction = null;
   if (playerControlScheme === 'wasd') {
@@ -288,6 +315,25 @@ function handleKeyDown(e) {
   const isPaused = typeof window !== 'undefined' && window.gameState ? window.gameState.isPaused : false;
   if (isPaused) {
     return; // Don't send input when paused
+  }
+
+  // Hide inactivity warning overlay immediately when player moves (before server response)
+  const overlay = document.getElementById('gameOverlay');
+  const overlayTitle = document.getElementById('overlayTitle');
+  if (overlay && overlayTitle && overlayTitle.textContent.includes('Inactivity Warning')) {
+    // Hide overlay immediately - player is active again
+    overlay.style.display = 'none';
+    // Reset pointer events
+    overlay.style.pointerEvents = '';
+    const overlayContent = overlay.querySelector('.overlay-content');
+    if (overlayContent) {
+      overlayContent.style.pointerEvents = '';
+    }
+    // Clear blinking animation classes
+    overlay.classList.remove('countdown-blinking');
+    if (overlayTitle) overlayTitle.classList.remove('countdown-blinking');
+    const overlayMessage = document.getElementById('overlayMessage');
+    if (overlayMessage) overlayMessage.classList.remove('countdown-blinking');
   }
 
   // Mark key as pressed and send input IMMEDIATELY - no throttle, no delay
