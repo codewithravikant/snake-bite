@@ -7,7 +7,8 @@
     "lint": "eslint server/**/*.js client/**/*.js",
     "lint:fix": "eslint server/**/*.js client/**/*.js --fix",
     "lint:server": "eslint server/**/*.js",
-    "lint:client": "eslint client/**/*.js"
+    "lint:client": "eslint client/**/*.js",
+    "postinstall": "cd server && npm install"
   },
   "devDependencies": {
     "eslint": "^8.57.0"
