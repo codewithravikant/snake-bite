@@ -1,0 +1,199 @@
+/* Bot Customization Modal Styles */
+
+.bot-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+.bot-modal-content {
+  background: white;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.bot-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.bot-modal-header h2 {
+  margin: 0;
+  color: #667eea;
+  font-size: 1.5em;
+}
+
+.bot-modal-close {
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: #666;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bot-modal-close:hover {
+  color: #333;
+}
+
+.bot-modal-body {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.bot-config-item {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: #f5f5f5;
+  border-radius: 8px;
+}
+
+.bot-config-item h3 {
+  margin: 0 0 15px 0;
+  color: #333;
+  font-size: 1.1em;
+}
+
+.bot-config-row {
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.bot-config-field {
+  flex: 1;
+  min-width: 150px;
+}
+
+.bot-config-field label {
+  display: block;
+  margin-bottom: 5px;
+  color: #666;
+  font-size: 0.9em;
+  font-weight: 500;
+}
+
+.bot-config-field input[type="text"],
+.bot-config-field select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.bot-config-field input[type="color"] {
+  width: 100%;
+  height: 40px;
+  padding: 2px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.bot-config-field input[type="text"].bot-name-input {
+  font-family: monospace;
+}
+
+.bot-name-prefix {
+  display: inline-block;
+  padding: 8px 8px 8px 12px;
+  background: #e0e0e0;
+  border: 1px solid #ddd;
+  border-right: none;
+  border-radius: 5px 0 0 5px;
+  color: #666;
+  font-weight: 500;
+}
+
+.bot-name-input-wrapper {
+  display: flex;
+  align-items: stretch;
+}
+
+.bot-name-input-wrapper .bot-name-input {
+  border-radius: 0 5px 5px 0;
+  border-left: none;
+  flex: 1;
+}
+
+.bot-validation-error {
+  margin-top: 15px;
+  padding: 12px;
+  background: #fee;
+  border: 1px solid #fcc;
+  border-radius: 5px;
+  color: #c33;
+  font-size: 0.9em;
+}
+
+.bot-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 20px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.bot-modal-footer button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.bot-modal-cancel {
+  background: #f5f5f5;
+  color: #333;
+}
+
+.bot-modal-cancel:hover {
+  background: #e0e0e0;
+}
+
+.bot-modal-save {
+  background: #667eea;
+  color: white;
+}
+
+.bot-modal-save:hover {
+  background: #5568d3;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .bot-config-row {
+    flex-direction: column;
+  }
+  
+  .bot-config-field {
+    min-width: 100%;
+  }
+}
+
